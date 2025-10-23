@@ -70,7 +70,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       {/* Logout */}
       <div className="p-4 border-t border-gray-200">
         <button
-          className={`btn btn-error w-full flex items-center justify-center gap-2 ${
+          className={`btn  w-full flex items-center justify-center gap-2 ${
             collapsed ? "btn-circle" : ""
           }`}
         >
