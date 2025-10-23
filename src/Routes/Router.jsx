@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Dashboard from "../Pages/Dashboard";
+import CalendarPage from "../Pages/CalendarPage";
 
 export  const router = createBrowserRouter([
  {
@@ -8,7 +9,7 @@ export  const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       { path: "/", element: <Dashboard /> },
-    //   { path: "/employees", element: <Employees /> },
+      { path: "/calendar", element: <CalendarPage></CalendarPage> },
     //   { path: "/reports", element: <Reports /> },
     //   { path: "/settings", element: <Settings /> },
     ],

@@ -8,12 +8,14 @@ import {
   Menu,
   ChevronLeft,
 } from "lucide-react";
+import { FaCalendarAlt } from "react-icons/fa";
 import Logo from "../assets/logo.png";
 
 const Sidebar = ({ collapsed, setCollapsed }) => {
   const links = [
     { name: "Dashboard", to: "/", icon: <LayoutDashboard size={20} /> },
     { name: "Employees", to: "/employees", icon: <Users size={20} /> },
+    { name: "Calendar", to: "/calendar", icon: <FaCalendarAlt size={20} /> },
     { name: "Reports", to: "/reports", icon: <FileBarChart size={20} /> },
     { name: "Settings", to: "/settings", icon: <Settings size={20} /> },
   ];
