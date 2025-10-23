@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router";
 import {
   LayoutDashboard,
@@ -9,12 +8,9 @@ import {
   Menu,
   ChevronLeft,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../assets/logo.png";
 
-const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
-
+const Sidebar = ({ collapsed, setCollapsed }) => {
   const links = [
     { name: "Dashboard", to: "/", icon: <LayoutDashboard size={20} /> },
     { name: "Employees", to: "/employees", icon: <Users size={20} /> },
@@ -23,75 +19,54 @@ const Sidebar = () => {
   ];
 
   return (
-    <motion.aside
-      animate={{ width: collapsed ? "5rem" : "16rem" }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="bg-base-100 shadow-lg p-4 flex flex-col h-screen fixed left-0 top-0 z-10"
+    <aside
+      className={`bg-base-100 shadow-lg flex flex-col h-screen fixed top-0 left-0 z-20 transition-width duration-300 ${
+        collapsed ? "w-20" : "w-64"
+      }`}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <AnimatePresence>
-          {!collapsed && (
-            <motion.img
-              key="logo"
-              src={Logo}
-              alt="Logo"
-             
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-            />
-          )}
-        </AnimatePresence>
-
+      {/* Header / Logo */}
+      <div
+        className={`flex items-center ${
+          collapsed ? "justify-center" : "justify-start"
+        } p-4 border-b border-gray-200`}
+      >
+        {!collapsed && (
+          <img src={Logo} alt="Logo"  />
+        )}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="btn btn-sm btn-ghost absolute top-4 right-3"
+          className={`ml-auto btn btn-ghost btn-sm ${
+            collapsed ? "" : "absolute right-4"
+          }`}
         >
           {collapsed ? <Menu size={20} /> : <ChevronLeft size={20} />}
         </button>
       </div>
 
       {/* Navigation */}
-      <ul className="space-y-2 flex-1 mt-8">
+      <ul className="flex-1 mt-6 space-y-2">
         {links.map((link) => (
           <li key={link.to}>
             <NavLink
               to={link.to}
               end
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${
+                `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
                   isActive
                     ? "bg-primary text-white"
                     : "text-gray-600 hover:bg-primary/10 hover:text-primary"
-                }`
+                } ${collapsed ? "justify-center" : "justify-start"}`
               }
             >
               {link.icon}
-              <AnimatePresence>
-                {!collapsed && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {link.name}
-                  </motion.span>
-                )}
-              </AnimatePresence>
+              {!collapsed && <span className="font-medium">{link.name}</span>}
             </NavLink>
           </li>
         ))}
       </ul>
 
       {/* Logout */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mt-auto"
-      >
+      <div className="p-4 border-t border-gray-200">
         <button
           className={`btn btn-error w-full flex items-center justify-center gap-2 ${
             collapsed ? "btn-circle" : ""
@@ -100,8 +75,8 @@ const Sidebar = () => {
           <LogOut size={18} />
           {!collapsed && <span>Logout</span>}
         </button>
-      </motion.div>
-    </motion.aside>
+      </div>
+    </aside>
   );
 };
 

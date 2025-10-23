@@ -1,6 +1,6 @@
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 shadow-sm px-6 flex justify-between items-center">
+    <div className="navbar bg-base-100 shadow-sm px-6 flex justify-between items-center h-16">
       <input
         type="text"
         placeholder="Search..."
